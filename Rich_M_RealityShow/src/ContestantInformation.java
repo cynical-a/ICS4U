@@ -19,14 +19,16 @@ public class ContestantInformation {
 	private String province; 
 	private String postalCode;
 	private String phoneNumber;
-	private String birthDate;
+	private String birthYear;
 	int year = Calendar.getInstance().get(Calendar.YEAR);
 	int month = Calendar.getInstance().get(Calendar.MONTH);
 	int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-	/**_______________________________________________________________________________
-	 * =================================================I forgot the word for this one
-	 * @throws InvalidInputException 
+	/**	
+	  * @throws InvalidInputException 
 	 */
+	//_______________________________________________________________________________
+	 //=================================================I forgot the word for this one
+
 	
 	public ContestantInformation(String fName, String lName, String stAddress, String c, String p, String postCode, String pNumber, String bDay) throws InvalidInputException
 	{ 
@@ -65,23 +67,25 @@ public class ContestantInformation {
 		this.province = p;
 	}
 	public void setpostalCode(String postCode) throws InvalidInputException{
-		if (postalCode.length() != 6 ||Character.isDigit(postalCode.charAt(0))||Character.isDigit(postalCode.charAt(2))|| Character.isDigit(postalCode.charAt(4))==false||Character.isDigit(postalCode.charAt(1)) == false||Character.isDigit(postalCode.charAt(3))== false || Character.isDigit(postalCode.charAt(5))==false)
-		{
+		if (postCode.length() != 6 ||Character.isDigit(postCode.charAt(0))||Character.isDigit(postCode.charAt(2))|| Character.isDigit(postCode.charAt(4))||Character.isDigit(postCode.charAt(1)) == false||Character.isDigit(postCode.charAt(3))== false || Character.isDigit(postCode.charAt(5))==false){
 			throw new InvalidInputException("Postal code must be 6 digits in correct alphanumeric order (X#X#X#).");
 		}
 		this.postalCode = postCode;
 	}
 	public void setphoneNumber(String pNumber) throws InvalidInputException{
-		if (phoneNumber.length() > 10||phoneNumber.length() < 10)
+		if (pNumber.length() > 10||pNumber.length() < 10)
 		{
 			throw new InvalidInputException("Phone number must be 10 digits.");
 		}
 		this.phoneNumber = pNumber;
 	}
-	public void setbirthDate(String bDay){
-		this.birthDate = bDay;
-	}
-	
+//	public void setbirthDate(String bDay) throws InvalidInputException{
+//		if (Character.isDigit(bDay.charAt(0)) == false|bDay == ""){
+//			throw new InvalidInputException("Birth Day must be in DD/MM/YYYY format ");
+//		}
+//		this.birthDate = bDay;
+//	}
+//	
 
 	/**
 	 * @return Returns the first name
@@ -140,22 +144,14 @@ public class ContestantInformation {
 	 * @return Returns the birth date
 	 * @throws InvalidInputException 
 	 */
-	public String getbirthDate() throws InvalidInputException{
-		if ((year-birthDate.charAt(2))< 18|| (month <= birthDate.charAt(1)))
-			{if (birthDate.charAt(0) > day && month == birthDate.charAt(1))
-			{
-				throw new InvalidInputException("Contestant is too young.");
-			}
-			throw new InvalidInputException("Contestant is too young.");
-
-			}
-		return this.birthDate;
-	}
-	
-	
-	public String toString(){
-		return firstName + " " + lastName + " " + streetAddress + " " + city + " " + province + " " + postalCode + " " + phoneNumber + " " + birthDate;
-	}
+//	public String getbirthYear() throws InvalidInputException{
+//		int ageYear = (year -  parseInt(birthYear);
+//		if (ageYear < 18&& birthMonth < month)
+//		{
+//				throw new InvalidInputException("Contestant is too young.");
+//			}
+//		return this.birthDate;
+//	}
 }
 
 
