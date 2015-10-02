@@ -19,7 +19,8 @@ public class ContestantInformation {
 	private String province; 
 	private String postalCode;
 	private String phoneNumber;
-	private String birthYear;
+	private int birthYear;
+	private int birthMonth;
 	int year = Calendar.getInstance().get(Calendar.YEAR);
 	int month = Calendar.getInstance().get(Calendar.MONTH);
 	int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -39,7 +40,6 @@ public class ContestantInformation {
 		this.setprovince(p);
 		this.setpostalCode(postCode);
 		this.setphoneNumber(pNumber);
-		this.setbirthDate(bDay);
 	}
 	
 	public ContestantInformation()
@@ -79,13 +79,7 @@ public class ContestantInformation {
 		}
 		this.phoneNumber = pNumber;
 	}
-//	public void setbirthDate(String bDay) throws InvalidInputException{
-//		if (Character.isDigit(bDay.charAt(0)) == false|bDay == ""){
-//			throw new InvalidInputException("Birth Day must be in DD/MM/YYYY format ");
-//		}
-//		this.birthDate = bDay;
-//	}
-//	
+
 
 	/**
 	 * @return Returns the first name
@@ -140,18 +134,24 @@ public class ContestantInformation {
 	public String getphoneNumber() {
 		return this.phoneNumber;
 	}
+	public void setbirthYear(String bYear)throws InvalidInputException{
+		int ageYear = (year - Integer.parseInt (bYear));
+		if (ageYear < 18 && birthMonth < month)
+		{
+			throw new InvalidInputException("You are too young.");
+		}
+		this.birthYear = Integer.parseInt(bYear);
+	}
+	public void setbirthMonth(String bMonth){
+		this.birthMonth = Integer.parseInt(bMonth);
+	}
 	/**
 	 * @return Returns the birth date
 	 * @throws InvalidInputException 
 	 */
-//	public String getbirthYear() throws InvalidInputException{
-//		int ageYear = (year -  parseInt(birthYear);
-//		if (ageYear < 18&& birthMonth < month)
-//		{
-//				throw new InvalidInputException("Contestant is too young.");
-//			}
-//		return this.birthDate;
-//	}
+	public int getbirthYear() {
+		return 0;
+	}
 }
 
 

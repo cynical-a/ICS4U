@@ -24,30 +24,65 @@ public class contestantMain {
 				System.out.print("Enter your last name: ");
 				String lName = scan.nextLine();
 				
-//				do{
-//					flag = false;
-//					System.out.print("Enter your year of birth");
-//					String bYear = scan.nextLine();
-//					System.out.print("Enter your month of birth");
-//					String bmonth = scan.nextLine();
-//					try {
-//						contestant1.setbirthYear(bYear);
-//						contestant1.setbirthMonth(bYear);
-//					}
-//					catch(InvalidInputException e){
-//						System.out.println(e.getMessage());
-//						flag = true;
-//					}
-//				}
-//				while (flag);
+				do{
+					flag = false;
+					System.out.print("Enter your year of birth");
+					String bYear = scan.nextLine();
+					System.out.print("Enter your month of birth");
+					String bMonth = scan.nextLine();
+					try {
+						contestant1.setbirthYear(bYear);
+						contestant1.setbirthMonth(bMonth);
+					}
+					catch(InvalidInputException e){
+						System.out.println(e.getMessage());
+						flag = true;
+					}
+				}
+				while (flag);
 				
 				flag = false;
 				System.out.print("Enter your Province ");
 				String p = scan.nextLine();
-				if (p == "Manitoba"||p=="mb"){
-	
-//nope
+				if (p.equalsIgnoreCase( "Manitoba")||p.equalsIgnoreCase("mb")){
+                         p = "MB";                                 
 					}
+				else if (p.equalsIgnoreCase( "British Columbia")||p.equalsIgnoreCase("bc")){
+                    p = "BC";                                 
+				}
+				else if (p.equalsIgnoreCase( "Ontario")||p.equalsIgnoreCase("on")){
+                    p = "ON";                                 
+				}
+				else if (p.equalsIgnoreCase( "Sasakatchewan")||p.equalsIgnoreCase("sk")){
+                    p = "SK";                                 
+				}
+				else if (p.equalsIgnoreCase( "Quebec")||p.equalsIgnoreCase("qc")){
+                    p = "QC";                                 
+				}
+				else if (p.equalsIgnoreCase( "Yukon")||p.equalsIgnoreCase("yt")){
+                    p = "YT";                                 
+				}
+				else if (p.equalsIgnoreCase( "Prince Edsward Island")||p.equalsIgnoreCase("pei")||p.equalsIgnoreCase("pe")){
+                    p = "PE";                                 
+				}
+				else if (p.equalsIgnoreCase( "Alberta")||p.equalsIgnoreCase("ab")){
+                    p = "AB";
+				}
+				else if (p.equalsIgnoreCase( "New Brunswick")||p.equalsIgnoreCase("nb")){
+                    p = "NB";                                 
+				}
+				else if (p.equalsIgnoreCase( "Nunavut")||p.equalsIgnoreCase("Nu")){
+                    p = "NU";                                 
+				}
+				else if (p.equalsIgnoreCase( "Northwest Territories")||p.equalsIgnoreCase("nt")){
+                    p = "NT";                                 
+				}
+				else if (p.equalsIgnoreCase( "Newfoundland and Labrador")||p.equalsIgnoreCase("nl")||p.equalsIgnoreCase("Newfoundland")||p.equalsIgnoreCase("Labrador")){
+                    p = "NL";                                 
+				}
+				else if (p.equalsIgnoreCase( "Nova Scotia")||p.equalsIgnoreCase("ns")){
+                    p = "NS";                                 
+				}
 				
 				System.out.print("Enter your city ");
 				String c = scan.nextLine();
