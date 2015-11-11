@@ -28,8 +28,8 @@ public class Label {
 		return Address0+Address1+Address2;
 	}
 	private String formatPhoneNumber(){
-		String phoneNum = ci1.getphoneNumber() + "\n";
-		String phoneFormat = "("+ phoneNum.charAt(0) + phoneNum.charAt(1) + phoneNum.charAt(2)+") "+phoneNum.charAt(3)+phoneNum.charAt(4)+ phoneNum.charAt(5)+"-"+phoneNum.charAt(6)+phoneNum.charAt(7)+phoneNum.charAt(8)+phoneNum.charAt(9);
+		String phoneNum = ci1.getphoneNumber();
+		String phoneFormat = "("+ phoneNum.charAt(0) + phoneNum.charAt(1) + phoneNum.charAt(2)+") "+phoneNum.charAt(3)+phoneNum.charAt(4)+ phoneNum.charAt(5)+"-"+phoneNum.charAt(6)+phoneNum.charAt(7)+phoneNum.charAt(8)+phoneNum.charAt(9) + "\n";
 	    return phoneFormat;
 	}
 

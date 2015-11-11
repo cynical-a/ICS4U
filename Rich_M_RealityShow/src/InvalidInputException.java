@@ -6,6 +6,7 @@
  * @author 324115906
  *
  */
+@SuppressWarnings("serial")
 public class InvalidInputException extends Exception {
 
 	/**
