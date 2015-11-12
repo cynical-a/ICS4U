@@ -15,14 +15,12 @@ import java.util.Scanner;
 public class contestantMain {
 
 	static ArrayList<ContestantInformation> contestants;
-	static String password = "password";
 
 	/**
-	 * This method allows a user to input all their contact information in able to attempt to get on a game show.
-	 * 
-	 * @param contestants An arraylist that contains ContestantInformation objects
+	 * @throws InvalidInputException 
 	 */
-	public static void addContestants(ArrayList<ContestantInformation> contestants ){
+	static String password = "password";
+	public static void addContestants(ArrayList<ContestantInformation> contestants )throws InvalidInputException{
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);	
 		boolean flag = false;
@@ -179,6 +177,7 @@ public class contestantMain {
 				contestant1.setstreetAddress(stAddress);
 				contestants.add(contestant1);
 
+				Collections.sort(contestants);
 				System.out.print(contestant1.getfirstName()+" was added successfully"+"\n"+"\n");
 				flag = false;
 				break;
@@ -194,9 +193,7 @@ public class contestantMain {
 		while (flag = true);
 
 	}
-	/**
-	 * Allows the user to search for a specified contestant in the list "contestants"
-	 */
+
 	public static void searchContestants()
 	{
 		boolean flag = true;
@@ -230,9 +227,6 @@ public class contestantMain {
 			}
 		}while(flag);
 	}
-	/**
-	 * Allows the administrator to delete a contestant from the list
-	 */
 	public static void deleteContestant(){
 		boolean flag = true;
 		do{
@@ -268,9 +262,6 @@ public class contestantMain {
 			}
 		}while(flag);
 	}
-	/**
-	 * Allows the administrator to fully clear the list
-	 */
 	public static void deleteAll(){
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -286,10 +277,6 @@ public class contestantMain {
 		}
 
 	}
-	/**
-	 * Allows the user to save the list to a text file called "contestantList.txt"
-	 * @throws FileNotFoundException if the file is not able to be loaded
-	 */
 	public static void save() throws FileNotFoundException{
 		FileOutputStream fileOutputStream = new FileOutputStream("src\\contestantList.txt");
 		PrintStream fpStream = new PrintStream(fileOutputStream);
@@ -308,11 +295,6 @@ public class contestantMain {
 		}
 		fpStream.close();
 	}
-
-	/**
-	 * Loads the text file "contestantList" into the arraylist
-	 * @throws InvalidInputException if the phonenumber or postal code is invalid.
-	 */
 	public static void load() throws InvalidInputException{
 		BufferedReader bReader;
 		try {
@@ -342,6 +324,7 @@ public class contestantMain {
 				contestant1.setphoneNumber(phoneNumber);
 				contestant1.setpostalCode(postalCode);
 				contestants.add(contestant1);
+				Collections.sort(contestants);
 
 			}
 		} catch (NumberFormatException e) {
@@ -352,12 +335,7 @@ public class contestantMain {
 			e.printStackTrace();
 		}
 
-		System.out.println("Loaded successfully\n");
-
 	}
-	/**
-	 * Prints all the contestants with their information
-	 */
 	public static void printAll(){
 		int totalContestants = contestants.size();
 		for (int i = 0; i < totalContestants; i++){
@@ -366,9 +344,6 @@ public class contestantMain {
 		}
 
 	}
-	/**
-	 * Allows the administrator to randomly generate a winner from the list
-	 */
 	public static void pickWinner(){
 		Random rand = new Random();
 
@@ -382,10 +357,7 @@ public class contestantMain {
 		}
 	}
 	@SuppressWarnings("resource")
-	/**
-	 * Allows the administrator to change their password
-	 * @throws FileNotFoundException if "adminPassword.txt" does not exist. 
-	 */
+
 	public static void changePassword() throws FileNotFoundException {
 		FileOutputStream fileOutputStream = new FileOutputStream("src\\adminPassword.txt");
 		PrintStream fpStream = new PrintStream(fileOutputStream);
@@ -404,12 +376,7 @@ public class contestantMain {
 			System.out.println("The passwords do not match, the password was not set.");
 		}
 	}
-	/**
-	 * Allows the user usage of administrator tools
-	 * @throws InvalidInputException if the load function does not complete properly
-	 */
-	@SuppressWarnings("unchecked")
-	public static void adminMenu() throws  InvalidInputException  {
+	public static void adminMenu() throws FileNotFoundException, InvalidInputException  {
 
 		Scanner scan = new Scanner(System.in);
 		BufferedReader bReader = null;
@@ -433,7 +400,7 @@ public class contestantMain {
 					String adminChoice = "1";
 					do{
 						System.out.println("Choose an option");
-						System.out.print("1. Delete a contestant"+"\n"+"2.Delete all contestants"+"\n"+"3. Load from file"+"\n"+ "4. Save to file"+"\n"+"5. Change Password"+"\n 6 Print All."+"\n 7 Generate a Winner"+"\n 8. Sort List Alphabetically \n 9. Return to the main menu.");
+						System.out.print("1. Delete a contestant"+"\n"+"2.Delete all contestants"+"\n"+"3. Load from file"+"\n"+ "4. Save to file"+"\n"+"5. Change Password"+"\n 6 Print All."+"\n 7 Generate a Winner"+"\n 8. Return to the main menu.");
 						adminChoice = scan.nextLine();
 						if (adminChoice.equals("1") ){
 							deleteContestant();
@@ -455,9 +422,6 @@ public class contestantMain {
 						}
 						if (adminChoice.equals("7")){
 							pickWinner();
-						}
-						if (adminChoice.equals("8")){
-							Collections.sort(contestants);
 						}
 						if (adminChoice.equals("8")){
 							System.out.println("\n");
@@ -486,12 +450,8 @@ public class contestantMain {
 	}
 
 	//==========================================================================================
-	/**
-	 * Main enterance to the program
-	 * @param args
-	 */
 	@SuppressWarnings("resource")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidInputException, IOException {
 		Scanner scan = new Scanner(System.in);	
 		contestants = new	ArrayList<ContestantInformation>();
 		String menuChoice;
@@ -500,29 +460,22 @@ public class contestantMain {
 			System.out.println("Choose an option");
 			System.out.print("1. Add new contestant"+"\n"+"2. Search"+"\n"+"3. Load from file"+"\n"+ "4. Save to file"+"\n"+"5. Administraton Tools"+"\n6. Terminate Program");
 			menuChoice = scan.nextLine();
-			try{
-				if (menuChoice.equals("1") ){
-					addContestants(contestants);
-				}
-				if (menuChoice.equals("2")){
-					searchContestants();
-				}
-				if (menuChoice.equals("3")){
-					load();
-				}
-				if (menuChoice.equals("4")){
-					save();
-				}
-				if (menuChoice.equals("5")){
-					adminMenu();
-					//	deleteAll();
-				} 
+
+			if (menuChoice.equals("1") ){
+				addContestants(contestants);
 			}
-			catch(InvalidInputException iie){
-				System.out.println("Encountered invalid information, please try again. " + iie.getMessage());
+			if (menuChoice.equals("2")){
+				searchContestants();
 			}
-			catch(IOException ioe){
-				System.out.println("An error has occured when opening files. " + ioe.getMessage());
+			if (menuChoice.equals("3")){
+				load();
+			}
+			if (menuChoice.equals("4")){
+				save();
+			}
+			if (menuChoice.equals("5")){
+				adminMenu();
+				//	deleteAll();
 			}
 		}while(menuChoice !="8");
 	}
